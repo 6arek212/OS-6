@@ -16,7 +16,7 @@ In this project we have implemented multipule design patterns (Active Object , S
 
 ## How To Run & Notes 
 
-  For Q.1\2\3 we have the following files instade of "main1.cpp":
+  For **Q.1\2\3** we have the following files instade of "main1.cpp":
     
     1- active_obj_cpp/hpp
 
@@ -35,7 +35,27 @@ In this project we have implemented multipule design patterns (Active Object , S
         ./client
 
 
-      
+</br>
+
+  For **Q.4** we have the following files:
+
+    guard.cpp/hpp
+
+
+
+</br>
+
+  For **Q.5** we have the following files:
+
+    singleton.cpp/hpp
+
+
+
+</br>
+
+  For **Q.5** we have the following files:
+
+    reactor.cpp/hpp
 
 
 
