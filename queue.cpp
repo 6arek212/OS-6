@@ -28,9 +28,9 @@ void createQ(Queue **queue)
         destroyQ(*queue);
     }
     *queue = (Queue *)malloc(sizeof(Queue));
-    (*queue)->root = NULL;
+    (*queue)->root = 0;
     (*queue)->size = 0;
-    (*queue)->tail = NULL;
+    (*queue)->tail = 0;
 }
 
 void destroyQ(Queue *queue)
@@ -65,7 +65,6 @@ void enQ(Queue *queue, const void *data)
         return;
     }
     pthread_mutex_lock(&lock);
-
     QNode *p = (QNode *)malloc(sizeof(QNode));
 
     p->data = data;
@@ -75,18 +74,18 @@ void enQ(Queue *queue, const void *data)
     {
         queue->root = queue->tail = p;
         queue->size++;
-        pthread_cond_signal(&cond1);
+        pthread_cond_broadcast(&cond1);
         pthread_mutex_unlock(&lock);
         return;
     }
     queue->tail->next = p;
     queue->tail = p;
     queue->size++;
-    pthread_cond_signal(&cond1);
+    pthread_cond_broadcast(&cond1);
     pthread_mutex_unlock(&lock);
 }
 
-char *deQ(Queue *queue)
+void *deQ(Queue *queue)
 {
     if (!queue)
     {
@@ -94,13 +93,13 @@ char *deQ(Queue *queue)
         return NULL;
     }
     pthread_mutex_lock(&lock);
-    if (queue->size == 0)
+    while (queue->size == 0)
     {
         // waiting on cond, No elemnts to be dequeued
-        printf("waiting on cond\n");
+        // printf("waiting on cond\n");
         pthread_cond_wait(&cond1, &lock);
     }
-    char *temp = (char *)queue->root->data;
+    void *temp = (void *)queue->root->data;
     void *p = queue->root;
     queue->root = queue->root->next;
     free(p);
@@ -109,7 +108,7 @@ char *deQ(Queue *queue)
     return temp;
 }
 
-char *peek(Queue *queue)
+void *peek(Queue *queue)
 {
     if (queue->size == 0)
     {

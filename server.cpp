@@ -16,61 +16,26 @@
 #include <signal.h>
 #include <sched.h>
 #include <pthread.h>
-#include "guard.hpp"
-#include "active_object.hpp"
+#include "queue.hpp"
+#include "active_obj.hpp"
 
 #define SIZE 1024
 
-#define PORT "3490" // the port users will be connecting to
+#define PORT "5000" // the port users will be connecting to
 
 #define BACKLOG 10 // how many pending connections queue will hold
 
-Queue *q1, *q2, *q3;
+Queue *q1 = 0, *q2 = 0, *q3 = 0;
 
-void encode(char *str)
-{
-    printf("encode: %s", str);
-
-    while (*str)
-    {
-        if (*str >= 'A' && *str <= 'Z')
-        {
-            *str = ((*str + 1) % 26) + 'A';
-        }
-        else if (*str >= 'a' && *str <= 'z')
-        {
-            *str = ((*str + 1) % 26) + 'a';
-        }
-        str++;
-    }
-}
-
-void swapBigAndSmall(char *str)
-{
-    printf("swaping big and small: %s", str);
-    while (*str)
-    {
-        if (*str >= 'A' && *str <= 'Z')
-        {
-            *str = 'a' + *str - 'A';
-        }
-        else if (*str >= 'a' && *str <= 'z')
-        {
-            *str = 'A' + *str - 'a';
-        }
-        str++;
-    }
-}
-
-void afterFunc1(void *p)
+void afterFunc1(QData *p)
 {
     enQ(q2, p);
-}
+};
 
-void afterFunc2(void *p)
+void afterFunc2(QData *p)
 {
     enQ(q3, p);
-}
+};
 
 void sigchld_handler(int s)
 {
@@ -112,8 +77,10 @@ void *handleClientSocket(void *args)
         {
             break;
         }
-
-        enQ(q1, buffer);
+        QData *p = (QData *)malloc(sizeof(QData));
+        p->data = buffer;
+        p->fd = new_fd;
+        enQ(q1, p);
     }
     printf("socket cloesed\n");
     close(new_fd);
@@ -194,10 +161,14 @@ int main(void)
 
     printf("server: waiting for connections...\n");
 
-    ActiveObject obj;
-    
-    newAO(q1, encode, afterFunc1);
-    newAO(q2, swapBigAndSmall, afterFunc2);
+    //---------------------------------------> Here we define our active object and queues 
+    createQ(&q1);
+    createQ(&q2);
+    createQ(&q3);
+    ActiveObject act1(1), act2(2), act3(3);
+    act1.newAO(q1, encode, afterFunc1);
+    act2.newAO(q2, swapBigAndSmall, afterFunc2);
+    act3.newAO(q3, response, NULL);
 
     while (1)
     { // main accept() loop

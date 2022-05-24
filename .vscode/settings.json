@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "queue.hpp": "c"
+        "queue.hpp": "c",
+        "iostream": "cpp"
     }
 }

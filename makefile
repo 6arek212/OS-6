@@ -15,17 +15,22 @@ test: test_guard.o guard.o
 	$(CC) $(CXXFLAGS) -o test test_guard.o guard.o -pthread -lstdc++
 
 
-server: server.o queue.o active_object.o
-	gcc -pthread -o server server.o queue.o active_object.o
+server: server.o queue.o active_obj.o
+	gcc -pthread -fPIE -o server server.o queue.o active_obj.o 
+
+client: client.o 
+	$(CC) -pthread -o client client.o
 
 
 
+client.o: client.cpp 
+	$(CC) $(CXXFLAGS) -c client.cpp -fPIE
 
-active_object.o: active_object.hpp
-	$(CC) $(CXXFLAGS) -c active_object.hpp 
+active_obj.o: active_obj.cpp active_obj.hpp
+	$(CC) $(CXXFLAGS) -c active_obj.cpp  -fPIE
 
-server.o: server.c
-	$(CC) -c server.c 
+server.o: server.cpp active_obj.hpp queue.hpp
+	$(CC) $(CXXFLAGS) -c server.cpp -fPIE
 
 test.o: test.cpp
 	$(CC) $(CXXFLAGS) -c test.cpp 

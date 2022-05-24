@@ -1,19 +1,26 @@
+#pragma once
+
+typedef struct QData
+{
+    void *data;
+    int fd;
+} QData;
 
 typedef struct QNode
 {
-    const void *data = 0;
-    struct QNode *next = 0;
+    const void *data;
+    struct QNode *next;
 } QNode;
 
 typedef struct Queue
 {
-    int size = 0;
-    QNode *root = 0;
-    QNode *tail = 0;
+    int size;
+    QNode *root;
+    QNode *tail;
 } Queue;
 
-void enQ(Queue *queue, const void *str);
-char *deQ(Queue *queue);
-char *peek(Queue *queue);
+void enQ(Queue *queue, const void *data);
+void *deQ(Queue *queue);
+void *peek(Queue *queue);
 void destroyQ(Queue *queue);
 void createQ(Queue **queue);
