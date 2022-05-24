@@ -52,4 +52,4 @@ guard.o: guard.cpp guard.hpp
 
 
 clean:
-	rm -rf *.o test main
+	rm -rf *.o test main client server
