@@ -14,21 +14,7 @@ In this project we have implemented multipule design patterns (Active Object , S
 
 </br>
 
-## How To Run
-
-
-`Run the following`
-
-    make all
-    ./server 
-    ./client 
-
-
-
-
-</br>
-
-## Notes 
+## How To Run & Notes 
 
   For Q.1\2\3 we have the following files instade of "main1.cpp":
     
