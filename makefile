@@ -11,8 +11,8 @@ main: main.o singleton.o
 test_g: test_guard.o guard.o
 	$(CC) $(CXXFLAGS) -o test_g test_guard.o guard.o -pthread -lstdc++
 
-server: server.o queue.o active_obj.o
-	gcc -pthread -fPIE -o server server.o queue.o active_obj.o 
+server: server.o main1.o
+	gcc -pthread -fPIE -o server server.o main1.o 
 
 client: client.o 
 	$(CC) -pthread -o client client.o
@@ -20,13 +20,16 @@ client: client.o
 
 
 
+main1.o: main1.cpp 
+	$(CC) $(CXXFLAGS)  -c main1.cpp -fPIE
+
 client.o: client.cpp 
 	$(CC) $(CXXFLAGS) -c client.cpp -fPIE
 
 active_obj.o: active_obj.cpp active_obj.hpp
 	$(CC) $(CXXFLAGS) -c active_obj.cpp  -fPIE
 
-server.o: server.cpp active_obj.hpp queue.hpp
+server.o: server.cpp 
 	$(CC) $(CXXFLAGS) -c server.cpp -fPIE
 
 test.o: test.cpp

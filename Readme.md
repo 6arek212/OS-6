@@ -16,15 +16,13 @@ In this project we have implemented multipule design patterns (Active Object , S
 
 ## How To Run & Notes 
 
-  For **Q.1\2\3** we have the following files instade of "main1.cpp":
+  For **Q.1\2\3** we have the following files:
     
-    1- active_obj_cpp/hpp
+    1- main1.cpp/hpp
 
     2- server.cpp
 
     3- client.cpp
-
-    4- queue.cpp/hpp
 
       for compling and exc: 
         

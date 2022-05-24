@@ -16,26 +16,13 @@
 #include <signal.h>
 #include <sched.h>
 #include <pthread.h>
-#include "queue.hpp"
-#include "active_obj.hpp"
-
+#include "main1.hpp"
 #define SIZE 1024
 
 #define PORT "5000" // the port users will be connecting to
 
 #define BACKLOG 10 // how many pending connections queue will hold
 
-Queue *q1 = 0, *q2 = 0, *q3 = 0;
-
-void afterFunc1(QData *p)
-{
-    enQ(q2, p);
-};
-
-void afterFunc2(QData *p)
-{
-    enQ(q3, p);
-};
 
 void sigchld_handler(int s)
 {
@@ -161,7 +148,7 @@ int main(void)
 
     printf("server: waiting for connections...\n");
 
-    //---------------------------------------> Here we define our active object and queues 
+    //---------------------------------------> Here we define our active object and queues
     createQ(&q1);
     createQ(&q2);
     createQ(&q3);
