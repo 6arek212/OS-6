@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "queue.hpp": "c",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "memory": "cpp",
+        "xmemory": "cpp"
     }
 }

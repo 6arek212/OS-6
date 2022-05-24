@@ -1,44 +1,38 @@
 #include <stdio.h>
-#include <pthread.h>
-#include <unistd.h>
-#include "queue.hpp"
-
-Queue *q;
-
-
-
-void *f1(void *args)
-{
-
-    printf("%s\n", deQ(q));
-    return NULL;
-}
-
-void *f2(void *args)
-{
-    return NULL;
-}
+#include "singleton.cpp"
+#include <stdio.h>
+#include <sys/mman.h>
+#include <assert.h>
 
 int main(int argc, char const *argv[])
 {
-    pthread_t tid1, tid2;
 
-    createQ(&q);
-    enQ(q, "Tarik");
-    enQ(q, "aaa");
+    printf("%d \n", Singleton<int>::instance());
 
-    printf("%s\n", deQ(q));
-    printf("%s\n", deQ(q));
+    double &y = Singleton<double>::instance();
+    y = 1.3;
 
-    destroyQ(q);
+    int &x = Singleton<int>::instance();
+    x++;
 
-    // pthread_create(&tid1, NULL, f2, NULL);
+    printf("%d  %f\n", Singleton<int>::instance(), Singleton<double>::instance());
 
-    // sleep(1);
+    Singleton<double>::destroy();
+    Singleton<int>::destroy();
 
-    // pthread_create(&tid2, NULL, f2, NULL);
-    // pthread_join(tid2, NULL);
-    // pthread_join(tid1, NULL);
+    x = 5;
+    y= 5555.55;
+
+
+    
+    // int N = 5;
+
+
+    // Singleton<void *>::instance() = mmap(NULL, N * sizeof(int),
+    //                 PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+
+
+    // assert(Singleton<void*>::instance() == Singleton<void*>::instance());
 
     return 0;
 }

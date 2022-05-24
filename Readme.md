@@ -43,6 +43,16 @@ In this project we have implemented multipule design patterns (Active Object , S
 
 
 
+    the answer for the questing is in .hpp file !
+
+
+    to run the guard example:
+
+      make test_g
+      ./test_g
+
+
+
 </br>
 
   For **Q.5** we have the following files:
@@ -53,7 +63,7 @@ In this project we have implemented multipule design patterns (Active Object , S
 
 </br>
 
-  For **Q.5** we have the following files:
+  For **Q.6** we have the following files:
 
     reactor.cpp/hpp
 
