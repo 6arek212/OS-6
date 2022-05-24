@@ -41,7 +41,7 @@ In this project we have implemented multipule design patterns (Active Object , S
 
 
 
-    the answer for the questing is in .hpp file !
+    the answer for the question is in .hpp file !
 
 
     to run the guard example:
