@@ -12,10 +12,10 @@ test_g: test_guard.o guard.o
 	$(CC) $(CXXFLAGS) -o test_g test_guard.o guard.o -pthread -lstdc++
 
 server: server.o aa.so
-	gcc -pthread -fPIE -fPIC -o server server.o ./aa.so
+	$(CC) $(CXXFLAGS) -pthread -fPIE -fPIC -o server server.o ./aa.so
 
 client: client.o 
-	$(CC) -pthread -o client client.o
+	$(CC) $(CXXFLAGS) -pthread -o client client.o
 
 
 
