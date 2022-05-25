@@ -11,8 +11,8 @@ main: main.o singleton.o
 test_g: test_guard.o guard.o
 	$(CC) $(CXXFLAGS) -o test_g test_guard.o guard.o -pthread -lstdc++
 
-server: server.o main1.o
-	gcc -pthread -fPIE -o server server.o main1.o 
+server: server.o aa.so
+	gcc -pthread -fPIE -fPIC -o server server.o ./aa.so
 
 client: client.o 
 	$(CC) -pthread -o client client.o
@@ -20,14 +20,16 @@ client: client.o
 
 
 
-main1.o: main1.cpp 
+aa.so: main1.o
+	$(CC) $(CXXFLAGS) -shared -fPIC -fPIE -o aa.so main1.o 
+
+
+
+main1.o: main1.cpp main1.hpp
 	$(CC) $(CXXFLAGS)  -c main1.cpp -fPIE
 
 client.o: client.cpp 
 	$(CC) $(CXXFLAGS) -c client.cpp -fPIE
-
-active_obj.o: active_obj.cpp active_obj.hpp
-	$(CC) $(CXXFLAGS) -c active_obj.cpp  -fPIE
 
 server.o: server.cpp 
 	$(CC) $(CXXFLAGS) -c server.cpp -fPIE
@@ -37,9 +39,6 @@ test.o: test.cpp
 
 main.o: main.cpp 
 	$(CC) $(CXXFLAGS)  -c main.cpp -fPIE
-
-queue.o: queue.cpp
-	$(CC)  -c queue.cpp 
 
 test_guard.o: test_guard.cpp guard.hpp
 	$(CC)  -c test_guard.cpp 
@@ -54,4 +53,4 @@ singleton.o: singleton.cpp
 
 
 clean:
-	rm -rf *.o test main client server
+	rm -rf *.o *.so *.a test main client server

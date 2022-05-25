@@ -6,10 +6,10 @@
 #include "main1.hpp"
 
 // Declaration of thread condition variable
-pthread_cond_t cond1 = PTHREAD_COND_INITIALIZER;
+static pthread_cond_t cond1 = PTHREAD_COND_INITIALIZER;
 
 // declaring mutex
-pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+static pthread_mutex_t lock1= PTHREAD_MUTEX_INITIALIZER;
 
 void printQ(Queue *q)
 {
@@ -24,7 +24,7 @@ void printQ(Queue *q)
 
 void destroyQ(Queue *queue)
 {
-    pthread_mutex_lock(&lock);
+    pthread_mutex_lock(&lock1);
 
     if (!queue || !queue->root)
     {
@@ -43,7 +43,7 @@ void destroyQ(Queue *queue)
     queue->root = NULL;
     free(queue);
     printf("Queue was destroied\n");
-    pthread_mutex_unlock(&lock);
+    pthread_mutex_unlock(&lock1);
 }
 
 void createQ(Queue **queue)
@@ -65,7 +65,7 @@ void enQ(Queue *queue, const void *data)
         printf("ERROR: something went wrong %p\n",queue);
         return;
     }
-    pthread_mutex_lock(&lock);
+    pthread_mutex_lock(&lock1);
     QNode *p = (QNode *)malloc(sizeof(QNode));
 
     p->data = data;
@@ -76,14 +76,14 @@ void enQ(Queue *queue, const void *data)
         queue->root = queue->tail = p;
         queue->size++;
         pthread_cond_broadcast(&cond1);
-        pthread_mutex_unlock(&lock);
+        pthread_mutex_unlock(&lock1);
         return;
     }
     queue->tail->next = p;
     queue->tail = p;
     queue->size++;
     pthread_cond_broadcast(&cond1);
-    pthread_mutex_unlock(&lock);
+    pthread_mutex_unlock(&lock1);
 }
 
 void *deQ(Queue *queue)
@@ -93,19 +93,19 @@ void *deQ(Queue *queue)
         printf("ERROR: queue is NULL\n");
         return NULL;
     }
-    pthread_mutex_lock(&lock);
+    pthread_mutex_lock(&lock1);
     while (queue->size == 0)
     {
         // waiting on cond, No elemnts to be dequeued
         // printf("waiting on cond\n");
-        pthread_cond_wait(&cond1, &lock);
+        pthread_cond_wait(&cond1, &lock1);
     }
     void *temp = (void *)queue->root->data;
     void *p = queue->root;
     queue->root = queue->root->next;
     free(p);
     queue->size--;
-    pthread_mutex_unlock(&lock);
+    pthread_mutex_unlock(&lock1);
     return temp;
 }
 
@@ -122,7 +122,6 @@ void *peek(Queue *queue)
 }
 
 //--------------------------------------------------------------------------------------
-Queue *q1 = 0, *q2 = 0, *q3 = 0;
 
 
 void afterFunc1(QData *p)

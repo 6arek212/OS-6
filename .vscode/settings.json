@@ -3,6 +3,7 @@
         "queue.hpp": "c",
         "iostream": "cpp",
         "memory": "cpp",
-        "xmemory": "cpp"
+        "xmemory": "cpp",
+        "vector": "cpp"
     }
 }

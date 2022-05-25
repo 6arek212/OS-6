@@ -1,6 +1,10 @@
 
 *.o
 
+*.so 
+
+*.o
+
 server
 
 client
