@@ -10,3 +10,10 @@ server
 client
 
 test
+
+
+test_guard
+
+test_singleton
+
+poll_server
