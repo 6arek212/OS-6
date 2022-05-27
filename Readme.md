@@ -21,7 +21,7 @@ In this project we have implemented multipule design patterns (Active Object , S
 ### (Please make sure to read the notes relevant to the question being examed)
 </br>
 
-#### For **Q.1\2\3** we have the following files:
+#### For **Q.1\2\3** (Active Object) we have the following files:
     
     1- main1.cpp/hpp
 
@@ -50,7 +50,7 @@ In this project we have implemented multipule design patterns (Active Object , S
 
 </br>
 
-#### For **Q.4** we have the following files:
+#### For **Q.4** (Guard) we have the following files:
 
     guard.cpp/hpp
 
@@ -68,7 +68,7 @@ In this project we have implemented multipule design patterns (Active Object , S
 
 </br>
 
-#### For **Q.5** we have the following files:
+#### For **Q.5** (Singleton) we have the following files:
 
     singleton.cpp/hpp
 
@@ -79,7 +79,7 @@ In this project we have implemented multipule design patterns (Active Object , S
 
 </br>
 
-#### For **Q.6** we have the following files:
+#### For **Q.6** (Reactor) we have the following files:
 
     reactor.cpp/hpp
     poll_server
