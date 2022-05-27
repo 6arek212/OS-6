@@ -23,7 +23,6 @@
 
 #define BACKLOG 10 // how many pending connections queue will hold
 
-Queue *q1 = 0, *q2 = 0, *q3 = 0;
 
 void sigchld_handler(int s)
 {

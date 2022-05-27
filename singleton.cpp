@@ -9,14 +9,14 @@ private:
     ~Singleton() {}
 
 public:
-    static T &instance()
+    static T * instance()
     {
         if (Singleton::obj == NULL)
         {
             Singleton::obj = new T();
             *Singleton::obj = 0;
         }
-        return *Singleton::obj;
+        return Singleton::obj;
     }
 
     static void destroy()

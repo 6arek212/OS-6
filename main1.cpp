@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include "main1.hpp"
 
+Queue *q1, *q2, *q3;
 // Declaration of thread condition variable
 static pthread_cond_t cond1 = PTHREAD_COND_INITIALIZER;
 

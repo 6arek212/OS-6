@@ -20,7 +20,9 @@ typedef struct Queue
     QNode *tail;
 } Queue;
 
-extern Queue *q1, *q2, *q3;
+extern Queue *q1;
+extern Queue *q2;
+extern Queue *q3;
 
 void enQ(Queue *queue, const void *data);
 void *deQ(Queue *queue);

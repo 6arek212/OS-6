@@ -29,5 +29,6 @@ int main(int argc, char const *argv[])
     pthread_join(tid2, NULL);
     pthread_join(tid3, NULL);
 
+    printf("test guard successful \n");
     return 0;
 }
