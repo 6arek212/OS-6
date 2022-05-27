@@ -14,6 +14,8 @@ int main()
 
     assert(*Singleton<int>::instance() == *Singleton<int>::instance());
 
+    Singleton<int>::destroy();
+    
     printf("singleton test success\n");
     return 0;
 }

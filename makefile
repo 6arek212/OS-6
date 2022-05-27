@@ -9,14 +9,13 @@ test: test_guard test_singleton
 	./test_singleton
 
 
-main: main.o singleton.o
-	$(CC) $(CXXFLAGS) -o main main.o singleton.o -lstdc++ 
+
 
 server: server.o aa.so
 	$(CC) $(CXXFLAGS) -pthread -fPIE -fPIC -o server server.o ./aa.so
 
-poll_server: poll_server.o reactor.o 
-	$(CC) $(CXXFLAGS) -pthread -fPIE -fPIC -o poll_server poll_server.o reactor.o 
+poll_server: poll_server.o aa.so
+	$(CC) $(CXXFLAGS) -pthread -fPIE -fPIC -o poll_server poll_server.o ./aa.so 
 
 client: client.o 
 	$(CC) $(CXXFLAGS) -pthread -o client client.o
