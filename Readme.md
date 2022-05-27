@@ -14,8 +14,11 @@ In this project we have implemented multipule design patterns (Active Object , S
 
 </br>
 
-## How To Run & Notes (Please make sure to read the notes relevant to the question being examed)
+## How To Run & Notes 
 
+</br>
+
+### (Please make sure to read the notes relevant to the question being examed)
 </br>
 
 #### For **Q.1\2\3** we have the following files:
