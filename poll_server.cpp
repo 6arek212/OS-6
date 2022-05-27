@@ -87,6 +87,8 @@ int main(void)
         exit(1);
     }
 
+    printf("Poll server is up...\n");
+    
     Reactor *rec = newReactor();
     installHandller(rec, listener, accept1);
     void *retval;
