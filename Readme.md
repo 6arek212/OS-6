@@ -36,7 +36,7 @@ In this project we have implemented multipule design patterns (Active Object , S
 
 </br>
 
-![](imgs/Creactor__in_action.png)
+![](imgs/reactor__in_action.png)
 
 </br>
 
